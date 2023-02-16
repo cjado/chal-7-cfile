@@ -1,6 +1,7 @@
-{
+{"type": "module",
   "dependencies": {
-    "inquirer": "^9.1.4",
-    "node.js": "^0.0.1-security"
+    "esm": "^3.2.25",
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.1.4"
   }
 }
