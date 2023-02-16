@@ -1,5 +1,6 @@
 import fs from 'fs/promises';
 import inquirer from 'inquirer';
+import { renderLicenseSection, renderLicenseBadge, renderLicenseLink } from './utils/generateMArkdown.js';
 
 async function createFile() {
   const answers = await inquirer.prompt([
@@ -48,6 +49,11 @@ async function createFile() {
 
   const { fileName, title, description, installation, usage, contributing, tests, license } = answers;
 
+  const licenseSection = renderLicenseSection(license);
+  const licenseBadge = renderLicenseBadge(license);
+  const licenseLink = renderLicenseLink(license);
+  
+
   const fileContent = `# ${title}
 
   ## Description
@@ -78,13 +84,17 @@ async function createFile() {
   
   ${tests}
   
-  ## License
+  ## License 
   
-  This project is licensed under the ${license} license.`;
+  ${licenseSection}
+${licenseBadge}
+
+${licenseLink}`;
+
 
   await fs.writeFile(fileName, fileContent);
 
   console.log(`File "${fileName}" created successfully.`);
-}
+};
 
 createFile();
